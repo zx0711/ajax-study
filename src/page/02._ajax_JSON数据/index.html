@@ -1,0 +1,72 @@
+<!--
+ * @Description: 
+ * @Author: xiao.zhang
+ * @Date: 2021-04-13 19:14:42
+ * @LastEditors: xiao.zhang
+ * @LastEditTime: 2021-04-15 16:23:24
+-->
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <style>
+      #result {
+        width: 200px;
+        height: 100px;
+        border: solid 1px #909090;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="result"></div>
+    <script>
+      const result = document.getElementById('result');
+      // 绑定键盘按下事件
+      window.onkeydown = function () {
+        // 1,创建对象
+        const xhr = new XMLHttpRequest();
+
+        // 自动获取对象设置，有json,text,blob...
+        xhr.responseType = 'json';
+
+        // 2,初始化，设置请求的方法和url
+        xhr.open('get', 'http://localhost:5500/json-server');
+
+        // 3,发送
+        xhr.send();
+
+        // 4,事件绑定，处理服务端返回的结果
+        // on when 当...时候
+        // readyState 是xhr对象中的属性，表示状态0 1 2 3 4
+        xhr.onreadystatechange = function () {
+          // 判断（服务端返回了所有的结果）
+          if (xhr.readyState === 4) {
+            // 判断响应状态码
+            // 2XX成功
+            if (xhr.status >= 200 && xhr.status < 300) {
+              // 处理结果 行 头 空行 体
+              // 状态码
+              console.log(xhr.status);
+              // 状态字符串
+              console.log(xhr.statusText);
+              // 所有响应头
+              console.log(xhr.getAllResponseHeaders());
+              // 响应体
+              console.log(typeof xhr.response);
+
+              // 手动对JSON字符串转为JSON对象
+              // const jsonObj = JSON.parse(xhr.response);
+              // result.innerHTML = jsonObj.name;
+
+              // 自动获取对象
+              result.innerHTML = xhr.response.name;
+            }
+          }
+        };
+      };
+    </script>
+  </body>
+</html>

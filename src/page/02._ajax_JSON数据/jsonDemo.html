@@ -1,0 +1,130 @@
+<!--
+ * @Description: 
+ * @Author: xiao.zhang
+ * @Date: 2021-04-15 15:30:34
+ * @LastEditors: xiao.zhang
+ * @LastEditTime: 2021-04-15 16:21:42
+-->
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>JSONDemo</title>
+  </head>
+  <body>
+    <!-- demo1 -->
+    <script>
+      const jsonObj = {
+        root: {
+          id: 'zx',
+          text: '时间选择框',
+          layout: 'map',
+          children: [
+            {
+              id: 'zx',
+              text: '时间选择框1',
+              layout: 'map',
+              children: [
+                {
+                  id: '11',
+                  name: 'tom',
+                },
+                {
+                  id: '22',
+                  name: 'lisa',
+                },
+              ],
+            },
+            {
+              id: 'zxx',
+              text: '时间选择框2',
+              layout: 'side',
+            },
+          ],
+        },
+      };
+
+      // 梳理
+      function handleData(obj) {
+        if (obj instanceof Array) {
+          if (obj.length > 1) {
+            obj.splice(1, obj.length - 1);
+          }
+          handleData(obj[0]);
+        } else if (obj instanceof Object) {
+          for (var index in obj) {
+            var jsonValue = obj[index];
+            handleData(jsonValue);
+          }
+        }
+      }
+
+      function jsonParse() {
+        // 调用
+        handleData(jsonObj);
+        var last = JSON.stringify(jsonObj, undefined, 2);
+        return last;
+      }
+      console.log(jsonParse(jsonObj));
+    </script>
+
+    <!-- demo2 -->
+    <script>
+      const demo2Obj = {
+        id: 1,
+        text: '下拉框',
+        children: [
+          {
+            id: 2,
+            text: '下拉框',
+          },
+          {
+            id: 3,
+            text: '下拉框',
+            children: [
+              {
+                id: 4,
+                text: '下拉框',
+              },
+              {
+                id: 5,
+                text: '下拉框',
+              },
+            ],
+          },
+        ],
+      };
+
+      const targetChildren = [
+        {
+          id: 41,
+          text: '下拉框41',
+        },
+        {
+          id: 42,
+          text: '下拉框42',
+        },
+      ];
+
+      function findTarget(obj, targetId, targetChildren) {
+        if (obj.id === targetId) {
+          obj.children = targetChildren;
+          return true;
+        } else if (obj.children) {
+          for (var i = 0; i < obj.children.length; i++) {
+            const flag = findTarget(obj.children[i], targetId, targetChildren);
+            if (flag === true) {
+              return true;
+            }
+          }
+        }
+        return false;
+      }
+
+      findTarget(demo2Obj, 5, targetChildren);
+      console.log(demo2Obj);
+    </script>
+  </body>
+</html>
