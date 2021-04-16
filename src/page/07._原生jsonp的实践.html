@@ -1,0 +1,47 @@
+<!--
+ * @Description: 
+ * @Author: xiao.zhang
+ * @Date: 2021-04-16 15:47:45
+ * @LastEditors: xiao.zhang
+ * @LastEditTime: 2021-04-16 16:29:14
+-->
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>JSONP实践</title>
+  </head>
+  <body>
+    用户名：<input type="text" id="username" />
+    <p></p>
+    <script>
+      // 获取input元素
+      const input = document.querySelector('input');
+      const p = document.querySelector('p');
+
+      function handle(data) {
+        input.style.border = '1px solid red';
+        // input.style.width = '200px';
+        // input.style.height = '200px';
+        console.log(typeof data);
+        p.innerHTML = data.msg;
+      }
+      // 绑定事件
+      input.onblur = function () {
+        // 获取用户输入值
+        let username = this.value;
+        // 向服务端发送请求，检测用户名是否存在
+        // 1，创建script标签
+        const scriptNode = document.createElement('script');
+
+        // 设置标签的src属性
+        scriptNode.src = 'http://localhost:5500/check-username';
+
+        //将script标签插入到文档中
+        document.body.appendChild(scriptNode);
+      };
+    </script>
+  </body>
+</html>

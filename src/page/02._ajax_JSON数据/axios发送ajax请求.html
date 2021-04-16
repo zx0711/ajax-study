@@ -1,0 +1,57 @@
+<!--
+ * @Description: 
+ * @Author: xiao.zhang
+ * @Date: 2021-04-16 11:38:37
+ * @LastEditors: xiao.zhang
+ * @LastEditTime: 2021-04-16 14:52:58
+-->
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>axios发送ajax请求</title>
+    <script src="https://cdn.bootcdn.net/ajax/libs/axios/0.21.1/axios.min.js"></script>
+  </head>
+  <body>
+    <button>GET</button>
+    <button>POST</button>
+    <script>
+      const btns = document.querySelectorAll('button');
+      // 配置baseURL
+      // axios.defaults.baseURL = 'http://localhost:5500';
+      btns[0].onclick = function () {
+        // get请求
+        axios
+          .get('/axios-server', {
+            // url参数
+            params: {
+              id: 100,
+              vip: 7,
+            },
+            // 请求头信息
+            Headers: {
+              name: 'atguigu',
+              age: 20,
+            },
+          })
+          .then((res) => {
+            console.log('+++++++res======', res);
+          });
+      };
+
+      btns[1].onclick = function () {
+        // get请求
+        axios
+          .post('http://127.0.0.1:5501/axios-server', {
+            userName: 'zx',
+            password: 123,
+          })
+          .then((res) => {
+            console.log('+++++++res======', res);
+          });
+      };
+    </script>
+  </body>
+</html>

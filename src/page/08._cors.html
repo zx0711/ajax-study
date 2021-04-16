@@ -1,0 +1,53 @@
+<!--
+ * @Description: 
+ * @Author: xiao.zhang
+ * @Date: 2021-04-16 17:03:11
+ * @LastEditors: xiao.zhang
+ * @LastEditTime: 2021-04-16 17:27:35
+-->
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>CORS</title>
+    <style>
+      #result {
+        width: 200px;
+        height: 200px;
+        border: 1px solid red;
+      }
+    </style>
+  </head>
+  <body>
+    <!-- cors：
+      定义：跨域资源共享，是官方的跨域解决方案，在服务器中做处理
+      如何工作：是通过设置一个响应头来告诉浏览器，该请求允许跨域，浏览器收到该响应以后就会对响应放行
+      设置：服务器端来设置
+     -->
+    <button>发送请求</button>
+    <div id="result"></div>
+    <script>
+      const btn = document.querySelector('button');
+      btn.onclick = function () {
+        // 1.创建对象
+        const x = new XMLHttpRequest();
+        // 2,初始化设置
+        x.open('GET', 'http://localhost:5500/cors-server');
+        // 3,发送
+        x.send();
+        // 4,绑定事件
+        x.onreadystatechange = function () {
+          console.log('打印响应', x);
+          if (x.readyState === 4) {
+            if (x.status >= 200 && x.status < 300) {
+              // 输出响应体
+              console.log(x.response);
+            }
+          }
+        };
+      };
+    </script>
+  </body>
+</html>
