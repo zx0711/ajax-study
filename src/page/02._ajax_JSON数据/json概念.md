@@ -3,7 +3,7 @@
  * @Author: xiao.zhang
  * @Date: 2021-04-14 19:54:37
  * @LastEditors: xiao.zhang
- * @LastEditTime: 2021-04-15 16:49:41
+ * @LastEditTime: 2021-04-19 11:09:21
 -->
 
 ### JSON
@@ -141,14 +141,14 @@ targetChildren 为
 ```
 
 function findTarget(obj,targetId,targetChildren){
-    if(obj.id==targetId){
+    if(obj.id===targetId){
           obj.children=targetChildren;
           return true;
     }else{
           if(obj.children!=null){
                for(var i=0; i<obj.children.length; i++){
                     var flag=findTarget(obj.children[i],targetId,targetChildren);
-                    if(flag==true){
+                    if(flag===true){
                           return true;
                     }
                }
