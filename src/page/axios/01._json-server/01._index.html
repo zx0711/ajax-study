@@ -1,0 +1,51 @@
+<!--
+ * @Description: 
+ * @Author: xiao.zhang
+ * @Date: 2021-04-19 14:44:07
+ * @LastEditors: xiao.zhang
+ * @LastEditTime: 2021-04-19 14:54:21
+-->
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>json-server</title>
+  </head>
+  <body>
+    <!--
+    json-server库
+    定义：一个在前端本地运行，可以存储json数据的server
+    作用：和express框架一样，返回数据，只不过他是封装好的，前端可以用来联调，写好假数据，接口调用
+   -->
+    <button>nihao</button>
+    <div id="result"></div>
+    <script>
+      const btn = document.querySelector('button');
+      const yy = document.getElementById('result');
+      btn.onclick = function () {
+        // 1,创建对象
+        const xhr = new XMLHttpRequest();
+        // 2,初始化，设置请求的方法和url
+        xhr.open('get', 'http://localhost:3000/zxs');
+
+        // 3,发送
+        xhr.send();
+
+        // 4,事件绑定，处理服务端返回的结果
+        xhr.onreadystatechange = function () {
+          // 判断（服务端返回了所有的结果）
+          if (xhr.readyState === 4) {
+            // 判断响应状态码
+            // 2XX成功
+            if (xhr.status >= 200 && xhr.status < 300) {
+              console.log('xhr.response', typeof xhr.response);
+              yy.innerHTML = JSON.parse(xhr.response).name;
+            }
+          }
+        };
+      };
+    </script>
+  </body>
+</html>

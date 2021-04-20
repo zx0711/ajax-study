@@ -1,0 +1,97 @@
+<!--
+ * @Description: 
+ * @Author: xiao.zhang
+ * @Date: 2021-04-19 18:24:31
+ * @LastEditors: xiao.zhang
+ * @LastEditTime: 2021-04-19 20:33:25
+-->
+<!--
+ * @Description: 
+ * @Author: xiao.zhang
+ * @Date: 2021-04-19 15:05:24
+ * @LastEditors: xiao.zhang
+ * @LastEditTime: 2021-04-19 17:04:35
+-->
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>axios拦截器</title>
+    <script src="https://cdn.bootcdn.net/ajax/libs/axios/0.21.1/axios.min.js"></script>
+  </head>
+  <body>
+    <div>
+      <h2>基本使用</h2>
+      <button>发送get请求</button>
+      <button>发送post请求</button>
+      <button>发送put请求</button>
+      <button>发送delete请求</button>
+    </div>
+    <script>
+      // 设置请求拦截器
+
+      // 打印结果：
+      //  请求拦截器成功-2号
+      //  请求拦截器成功-1号
+      //  响应拦截器成功-1号
+      //  响应拦截器成功-2号
+      axios.interceptors.request.use(
+        function (config) {
+          console.log('请求拦截器成功-1号');
+
+          return config;
+        },
+        function (error) {
+          console.log('请求拦截器失败-1号');
+          return Promise.reject(error);
+        }
+      );
+      axios.interceptors.request.use(
+        function (config) {
+          console.log('请求拦截器成功-2号');
+          return config;
+        },
+        function (error) {
+          console.log('请求拦截器失败-2号');
+          return Promise.reject(error);
+        }
+      );
+
+      // 设置响应拦截器
+      axios.interceptors.response.use(
+        function (response) {
+          console.log('响应拦截器成功-1号');
+          return response;
+        },
+        function (error) {
+          console.log('响应拦截器失败-1号');
+          return Promise.reject(error);
+        }
+      );
+
+      axios.interceptors.response.use(
+        function (response) {
+          console.log('响应拦截器成功-2号');
+          return response;
+        },
+        function (error) {
+          console.log('响应拦截器失败-2号');
+          return Promise.reject(error);
+        }
+      );
+
+      axios({
+        method: 'get',
+        url: ' http://localhost:3000/posts',
+      })
+        .then((res) => {
+          console.log('测试拦截器返回的结果', res);
+        })
+        .catch((error) => {
+          console.log('测试拦截器返回的失败结果', error);
+        });
+    </script>
+  </body>
+</html>

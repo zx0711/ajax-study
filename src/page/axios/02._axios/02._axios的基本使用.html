@@ -1,0 +1,89 @@
+<!--
+ * @Description: 
+ * @Author: xiao.zhang
+ * @Date: 2021-04-19 15:05:24
+ * @LastEditors: xiao.zhang
+ * @LastEditTime: 2021-04-19 17:04:35
+-->
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>axios的基本使用</title>
+    <script src="https://cdn.bootcdn.net/ajax/libs/axios/0.21.1/axios.min.js"></script>
+  </head>
+  <body>
+    <div>
+      <h2>基本使用</h2>
+      <button>发送get请求</button>
+      <button>发送post请求</button>
+      <button>发送put请求</button>
+      <button>发送delete请求</button>
+    </div>
+    <script>
+      // 获取按钮
+      const btns = document.querySelectorAll('button');
+
+      // 第一个
+      btns[0].onclick = function () {
+        // 发送ajax
+        axios({
+          method: 'GET',
+          url: ' http://localhost:3000/posts',
+        }).then((res) => {
+          console.log('++++++=====res======+', res);
+        });
+      };
+
+      // 第二个
+      btns[1].onclick = function () {
+        // 发送ajax
+        axios({
+          method: 'POST',
+          url: ' http://localhost:3000/posts',
+          // 设置请求体
+          data: {
+            title: '今天天气不错，还挺风和日丽的',
+            author: 'zx',
+          },
+        }).then((res) => {
+          console.log('++++++=====res======+', res);
+        });
+      };
+
+      // 第三个
+      btns[2].onclick = function () {
+        // 发送ajax
+        axios({
+          method: 'PUT',
+          url: ' http://localhost:3000/comments/1',
+          // 设置请求体
+          data: {
+            title: '今天是4月19号',
+            author: '张三',
+          },
+        }).then((res) => {
+          console.log('++++++=====res======+', res);
+        });
+      };
+
+      // 第四个
+      btns[3].onclick = function () {
+        // 发送ajax
+        axios({
+          method: 'delete',
+          url: ' http://localhost:3000/posts/3',
+          // 设置请求体
+          data: {
+            title: '今天是4月19号',
+            author: '张三',
+          },
+        }).then((res) => {
+          console.log('++++++=====res======+', res);
+        });
+      };
+    </script>
+  </body>
+</html>

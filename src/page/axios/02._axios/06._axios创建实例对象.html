@@ -1,0 +1,53 @@
+<!--
+ * @Description: 
+ * @Author: xiao.zhang
+ * @Date: 2021-04-19 18:24:31
+ * @LastEditors: xiao.zhang
+ * @LastEditTime: 2021-04-19 18:37:13
+-->
+<!--
+ * @Description: 
+ * @Author: xiao.zhang
+ * @Date: 2021-04-19 15:05:24
+ * @LastEditors: xiao.zhang
+ * @LastEditTime: 2021-04-19 17:04:35
+-->
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>axios创建实例对象</title>
+    <script src="https://cdn.bootcdn.net/ajax/libs/axios/0.21.1/axios.min.js"></script>
+  </head>
+  <body>
+    <div>
+      <h2>基本使用</h2>
+      <button>发送get请求</button>
+      <button>发送post请求</button>
+      <button>发送put请求</button>
+      <button>发送delete请求</button>
+    </div>
+    <script>
+      // 获取按钮
+      const btns = document.querySelectorAll('button');
+
+      // 创建实例对象
+      const instance = axios.create({
+        baseURL: 'http://localhost:3000',
+        timeout: 2000,
+      });
+
+      console.log('instance', instance);
+
+      // 第一个
+      btns[0].onclick = function () {
+        // 这里instance功能和axios功能几乎一样
+        instance.get('/posts', {
+          timeout: 5000,
+        });
+      };
+    </script>
+  </body>
+</html>

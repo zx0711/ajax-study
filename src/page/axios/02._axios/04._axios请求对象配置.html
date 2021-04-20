@@ -1,0 +1,53 @@
+<!--
+ * @Description: 
+ * @Author: xiao.zhang
+ * @Date: 2021-04-19 17:35:15
+ * @LastEditors: xiao.zhang
+ * @LastEditTime: 2021-04-19 18:00:50
+-->
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>axios请求对象（所有请求方式的config）</title>
+    <script src="https://cdn.bootcdn.net/ajax/libs/axios/0.21.1/axios.min.js"></script>
+  </head>
+  <body>
+    <div>
+      <h2>基本使用4</h2>
+      <button>发送get请求</button>
+      <button>发送post请求</button>
+      <button>发送put请求</button>
+      <button>发送delete请求</button>
+    </div>
+    <script>
+      // 获取按钮
+      const btns = document.querySelectorAll('button');
+
+      // 第一个
+      btns[0].onclick = function () {
+        // 发送ajax
+        axios({
+          method: 'POST',
+          url: '/posts',
+          baseURL: 'http://localhost:3000',
+          transformResponse: [
+            function (data) {
+              return JSON.parse(data)[0];
+            },
+          ],
+          // get请求请求体
+          params: {
+            ID: 12345,
+          },
+          // post请求请求体
+          data: 'Country=Brasil&City=Belo Horizonte',
+        }).then((res) => {
+          console.log('结果', res);
+        });
+      };
+    </script>
+  </body>
+</html>

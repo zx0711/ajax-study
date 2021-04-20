@@ -1,0 +1,47 @@
+{
+  "posts": [
+    {
+      "id": 1,
+      "title": "json-server",
+      "author": "typicode"
+    },
+    {
+      "title": "今天天气不错，还挺风和日丽的",
+      "author": "zx",
+      "id": 2
+    },
+    {
+      "title": "今天天气不错，还挺风和日丽的",
+      "author": "zx",
+      "id": 4
+    },
+    {
+      "title": "今天天气不错，还挺风和日丽的",
+      "author": "zx",
+      "id": 5
+    },
+    {
+      "Country": "Brasil",
+      "City": "Belo Horizonte",
+      "id": 6
+    },
+    {
+      "Country": "Brasil",
+      "City": "Belo Horizonte",
+      "id": 7
+    }
+  ],
+  "comments": [
+    {
+      "title": "今天是4月19号",
+      "author": "张三",
+      "id": 1
+    }
+  ],
+  "profile": {
+    "name": "typicode"
+  },
+  "zxs": {
+    "name": "typicode"
+  }
+}

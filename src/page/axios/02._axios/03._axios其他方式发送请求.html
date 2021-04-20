@@ -1,0 +1,51 @@
+<!--
+ * @Description: 
+ * @Author: xiao.zhang
+ * @Date: 2021-04-19 17:08:42
+ * @LastEditors: xiao.zhang
+ * @LastEditTime: 2021-04-19 17:34:14
+-->
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>axios其他方式发送请求</title>
+    <script src="https://cdn.bootcdn.net/ajax/libs/axios/0.21.1/axios.min.js"></script>
+  </head>
+  <body>
+    <div>
+      <h2>基本使用</h2>
+      <button>发送get请求</button>
+      <button>发送post请求</button>
+      <button>发送put请求</button>
+      <button>发送delete请求</button>
+    </div>
+    <script>
+      // 获取按钮
+      const btns = document.querySelectorAll('button');
+
+      // 发送get请求
+      btns[0].onclick = function () {
+        axios
+          .request({
+            method: 'get',
+            url: 'http://localhost:3000/posts?name=zx',
+          })
+          .then((res) => {
+            const { config, data, headers, request } = res;
+            /**
+             * config: 配置对象、请求体
+             * data: 对象形式响应体
+             * headers: 响应头
+             * request: 原生的ajax请求对象
+             * status: 响应状态码
+             * statusText: 响应状态字符串
+             */
+            console.log('====res====', res);
+          });
+      };
+    </script>
+  </body>
+</html>
