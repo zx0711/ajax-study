@@ -2,6 +2,8 @@
 
 # dependencies
 /node_modules
+/document
+/课件
 /.pnp
 .pnp.js
 
@@ -10,6 +12,7 @@
 
 # production
 /build
+
 
 # misc
 .DS_Store
